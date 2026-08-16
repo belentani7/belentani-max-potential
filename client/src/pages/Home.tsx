@@ -5,7 +5,7 @@ import { ArchiveModal, ProtocolModal } from '../components/EvidenceWindow';
 import { SceneId, QualityTier } from '../game/runtime';
 
 /**
- * BELENTANI — JUDAS EXPERIENCE
+ * BELENTANI — JUDAS EXPERIENCE (MASTER RECONSTRUCTION)
  * World-class immersive web artwork & audiovisual game-like experience.
  */
 
