@@ -8,6 +8,9 @@ interface ExperienceCanvasProps {
   onSceneChange?: (scene: SceneId) => void;
 }
 
+/**
+ * ExperienceCanvas - Renders the Three.js WebGL experience with strict React lifecycle management.
+ */
 export const ExperienceCanvas: React.FC<ExperienceCanvasProps> = ({
   scene,
   quality = 'balanced',
