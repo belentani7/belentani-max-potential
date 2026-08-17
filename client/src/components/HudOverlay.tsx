@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SceneId } from '../game/runtime';
-import { Compass, Volume2, VolumeX, Menu, X, Key, Disc, User, Shield, Radio, Music } from 'lucide-react';
+import { Compass, Volume2, VolumeX, Menu, X, Key, Disc, FileText } from 'lucide-react';
 
 interface HudOverlayProps {
   currentScene: SceneId;
@@ -48,6 +48,17 @@ export const HudOverlay: React.FC<HudOverlayProps> = ({
         </div>
 
         <div className="flex items-center gap-3">
+          <a
+            href="/game_bible.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/30 px-3.5 py-2.5 rounded text-cyan-400 text-xs font-mono backdrop-blur-md transition-all shadow-lg"
+            title="Biblia de Videojuego (Documentación)"
+          >
+            <FileText className="w-4 h-4 text-cyan-400" />
+            <span className="hidden sm:inline">BIBLIA PDF</span>
+          </a>
+
           <button
             onClick={onToggleAudio}
             className="flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/30 px-3.5 py-2.5 rounded text-cyan-400 text-xs font-mono backdrop-blur-md transition-all shadow-lg"
@@ -161,12 +172,14 @@ export const HudOverlay: React.FC<HudOverlayProps> = ({
             >
               ENTRAR AL SISTEMA 3D [CLICK]
             </button>
-            <button
-              onClick={onOpenArchive}
-              className="bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/40 font-mono text-xs tracking-widest px-6 py-3.5 rounded transition-all"
+            <a
+              href="/game_bible.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-cyan-500/40 font-mono text-xs tracking-widest px-6 py-3.5 rounded transition-all inline-flex items-center justify-center gap-2"
             >
-              VER ARCHIVOS
-            </button>
+              <FileText className="w-4 h-4" /> BIBLIA DE VIDEOJUEGO
+            </a>
           </div>
         </div>
       )}
