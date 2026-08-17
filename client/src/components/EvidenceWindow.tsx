@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, Music, ShieldAlert, CheckCircle2, Disc, User, Users, Globe, Award } from 'lucide-react';
+import { X, ExternalLink, Music, ShieldAlert, CheckCircle2, Disc, User, Users, Shield, Zap } from 'lucide-react';
+import { BELENTANI_LORE } from '../game/lore';
 
 interface ArchiveModalProps {
   isOpen: boolean;
@@ -14,19 +15,19 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
   isPlayingAudio,
   onToggleAudio,
 }) => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'music' | 'allies'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'music' | 'elements' | 'allies'>('overview');
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-2xl animate-in fade-in duration-200">
-      <div className="relative w-full max-w-4xl bg-slate-900 border border-cyan-500/40 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+      <div className="relative w-full max-w-5xl bg-slate-900 border border-cyan-500/40 rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-cyan-500/20 bg-slate-950/80">
           <div className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
             <span className="font-mono text-xs text-cyan-400 font-bold tracking-widest">
-              BELENTANI CENTRAL ARCHIVE // DATABASE
+              BELENTANI CENTRAL ARCHIVE // MASTER DATABASE
             </span>
           </div>
           <button
@@ -38,20 +39,20 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex border-b border-cyan-500/20 bg-slate-950/40 px-6 gap-4 font-mono text-xs">
+        <div className="flex border-b border-cyan-500/20 bg-slate-950/40 px-6 gap-6 font-mono text-xs overflow-x-auto">
           <button
             onClick={() => setActiveTab('overview')}
-            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 ${
+            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'overview'
                 ? 'border-red-500 text-red-400'
                 : 'border-transparent text-gray-400 hover:text-white'
             }`}
           >
-            <User className="w-4 h-4" /> ARTISTA & ERA
+            <User className="w-4 h-4" /> EL ARTEFACTO & ERA
           </button>
           <button
             onClick={() => setActiveTab('music')}
-            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 ${
+            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'music'
                 ? 'border-red-500 text-red-400'
                 : 'border-transparent text-gray-400 hover:text-white'
@@ -60,8 +61,18 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
             <Music className="w-4 h-4" /> MON AMOUR
           </button>
           <button
+            onClick={() => setActiveTab('elements')}
+            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
+              activeTab === 'elements'
+                ? 'border-red-500 text-red-400'
+                : 'border-transparent text-gray-400 hover:text-white'
+            }`}
+          >
+            <Shield className="w-4 h-4" /> 5 ELEMENTOS
+          </button>
+          <button
             onClick={() => setActiveTab('allies')}
-            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 ${
+            className={`py-3 border-b-2 font-bold tracking-wider transition-all flex items-center gap-2 whitespace-nowrap ${
               activeTab === 'allies'
                 ? 'border-red-500 text-red-400'
                 : 'border-transparent text-gray-400 hover:text-white'
@@ -77,31 +88,24 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-3xl font-black text-white mb-4 tracking-tight">
-                  BELENTANI // GUERRERO-ÁNGL
+                  {BELENTANI_LORE.artist.name} // {BELENTANI_LORE.artist.stats}
                 </h2>
                 <p className="text-gray-300 font-light leading-relaxed mb-6">
-                  Artista brasileño de 1.94m con una presencia escénica magnética. Su visión artística combina la estética cyberpunk, el misticismo digital y la narrativa de la <span className="text-red-500 font-medium">Era de Judas</span> y la Dimensión Zion.
+                  {BELENTANI_LORE.era.description}
                 </p>
-                <div className="grid grid-cols-2 gap-4 font-mono text-xs">
-                  <div className="bg-slate-950/60 p-3 rounded border border-cyan-500/20">
-                    <span className="text-gray-500 block mb-1">ORIGEN</span>
-                    <span className="text-white font-bold">Brasil</span>
-                  </div>
-                  <div className="bg-slate-950/60 p-3 rounded border border-cyan-500/20">
-                    <span className="text-gray-500 block mb-1">ALTURA</span>
-                    <span className="text-white font-bold">1.94 m</span>
-                  </div>
+                <div className="bg-red-950/40 border border-red-500/30 p-4 rounded-lg font-mono text-xs text-red-300 italic mb-4">
+                  "{BELENTANI_LORE.artist.tagline}"
                 </div>
               </div>
               <div className="border border-red-500/30 rounded-xl p-6 bg-slate-950/60 space-y-4">
                 <h3 className="font-mono text-xs text-red-400 tracking-widest font-bold">
-                  FILOSOFÍA CREATIVA
+                  MANIFESTO DEL ARTEFACTO
                 </h3>
                 <p className="text-sm text-gray-300 font-light leading-relaxed">
-                  "La música no es solo sonido; es un sistema de archivos que sobrevive a la caída." Belentani diseña cada lanzamiento como una experiencia inmersiva total.
+                  {BELENTANI_LORE.artist.manifesto}
                 </p>
                 <div className="pt-2 border-t border-slate-800 flex justify-between font-mono text-xs text-cyan-400">
-                  <span>ESTATUS: ACTIVO</span>
+                  <span>ANTAGONISTA: JUDAS (VIRUS)</span>
                   <span>ZION SECURE</span>
                 </div>
               </div>
@@ -115,7 +119,7 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
                   MON AMOUR
                 </h2>
                 <p className="text-gray-300 font-light leading-relaxed mb-6">
-                  El himno central de la era. Una fusión impecable de melodías vocales profundas, tensión dramática y producción electrónica de primer nivel.
+                  El himno central de la era. Una fusión impecable de melodías vocales profundas, tensión dramática y producción electrónica de primer nivel respaldada por derechos exclusivos.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <button
@@ -137,18 +141,31 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
                 </div>
               </div>
               <div className="border border-cyan-500/30 rounded-xl p-6 bg-slate-950/60 space-y-3 font-mono text-xs">
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-gray-500">FORMATO:</span>
-                  <span className="text-white">STREAMING HD</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-gray-500">DERECHOS:</span>
-                  <span className="text-cyan-400">EXCLUSIVOS / REGISTRADOS</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-gray-500">CLAVE DEL PUZZLE:</span>
-                  <span className="text-red-400">JUDAS / MON AMOUR</span>
-                </div>
+                {BELENTANI_LORE.quotes.map((q, i) => (
+                  <div key={i} className="border-b border-slate-800 pb-2 text-gray-300 italic">
+                    "{q}"
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'elements' && (
+            <div className="space-y-4">
+              <h2 className="text-2xl font-black text-white mb-2 tracking-tight">
+                LOS CINCO ELEMENTOS (PROTOCOLO DE PROTECCIÓN)
+              </h2>
+              <p className="text-sm text-gray-300 font-light mb-6">
+                La mente de Belentani está protegida por una red integrada de guardianes y anclajes conceptuales.
+              </p>
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 font-mono text-xs">
+                {BELENTANI_LORE.elements.map((el, idx) => (
+                  <div key={idx} className="bg-slate-950/60 border border-cyan-500/30 p-4 rounded-lg space-y-2">
+                    <span className="text-red-400 font-bold block">{el.name}</span>
+                    <span className="text-cyan-400 text-[10px] block">{el.role.toUpperCase()}</span>
+                    <p className="text-gray-300 font-sans text-xs">{el.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -161,11 +178,15 @@ export const ArchiveModal: React.FC<ArchiveModalProps> = ({
               <p className="text-sm text-gray-300 font-light mb-6">
                 El ecosistema creativo que respalda la visión de Belentani en producción, dirección y despliegue visual.
               </p>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 font-mono text-xs">
-                {['Duck Prod', 'Lorena', 'Natalia', 'Pedro', 'Marcos', 'Santos', 'John', 'Rafael'].map((ally, idx) => (
-                  <div key={idx} className="bg-slate-950/60 border border-cyan-500/30 p-4 rounded-lg flex items-center justify-between">
-                    <span className="text-white font-bold">{ally}</span>
-                    <span className="text-cyan-400 text-[10px]">VERIFIED</span>
+              <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 font-mono text-xs">
+                {BELENTANI_LORE.allies.map((ally, idx) => (
+                  <div key={idx} className="bg-slate-950/60 border border-cyan-500/30 p-4 rounded-lg space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-white font-bold">{ally.name}</span>
+                      <span className="w-2 h-2 rounded-full" style={{ backgroundColor: ally.color }} />
+                    </div>
+                    <span className="text-cyan-400 text-[10px] block">{ally.role}</span>
+                    <p className="text-gray-400 font-sans text-[11px] leading-tight">{ally.desc}</p>
                   </div>
                 ))}
               </div>
